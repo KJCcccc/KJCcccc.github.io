@@ -1,0 +1,164 @@
+
+/*this is the css for spring project one*/
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+
+button {
+    margin: 20px 0;
+    font-family: "Montserrat";
+    font-size: 16pt;
+    word-spacing: 5pt;
+    text-align: center;
+    background-color: #002FA7;
+    color: whitesmoke;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+h1{
+	max-width: 1500px;
+	font-family: "Rubik mono one";
+	letter-spacing: 2pt;
+	background-color: #1b1b1b;
+	color: whitesmoke;
+	text-align: center;
+
+}
+
+header a{
+	color: white;
+}
+
+header a:hover{
+	color: whitesmoke;
+	font-style: oblique;
+}
+
+h2{
+	font-family: "Montserrat";
+	font-size: 18pt;
+	word-spacing: 7pt;
+	text-align: center;
+	color: #3d3d3d;
+
+}
+
+h3{
+	font-family: "Montserrat";
+	font-size: 12pt;
+	word-spacing: 5pt;
+	text-align: left;
+	color: #424242;
+
+}
+
+h4{
+    max-width: 1500px;
+	font-family: "Montserrat";
+	font-size: 13pt;
+	word-spacing: 5pt;
+	color: #853535;
+	background-color: whitesmoke;
+	text-align: center;
+	
+
+}
+
+p{
+	font-family: "Montserrat";
+	font-size: 18pt;
+	word-spacing: 5pt;
+	text-align: center;
+	color: #312b2b;
+
+}
+
+
+
+a{
+	font-family: "Montserrat";
+    color:#575656 ;
+	text-decoration: none;
+}
+
+a:hover{
+
+	font-family: "Montserrat";
+    color:#575656;
+	font-style: oblique;
+    text-decoration: #853535 wavy underline;
+
+}
+
+
+
+footer a{
+
+	font-family: "Rubik mono one";
+	text-align: center;
+	color: #a79a9a;
+}
+
+footer a:hover{
+
+	color: #a79a9a;
+	font-style: oblique;
+	font-weight: 2pt;
+}
+
+#table th,#table td{
+	width:20%;
+    text-align:center;
+    margin:20px auto;
+    font-family: "biryani";
+    text-decoration: none;
+
+}
+
+#center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+img{
+	text-align: center;
+    
+    max-width: 200px; /* or any size you prefer */
+    height: auto;
+    margin: 20px 0; /* Adds space above and below the image */
+    
+
+}
+
+
+
+
+div.cover{
+	
+	border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Overrides mobile style when viewport exceeds 600px */
+@media only screen and (min-width: 600px) {}
