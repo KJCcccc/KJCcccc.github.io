@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    <title>News Search</title>
+</head>
+<body>
+    <h1>Search for News</h1>
+    <input type="text" id="keyword" placeholder="Enter keywords">
+    <button onclick="fetchNews()">Search News</button>
+    <div id="news-container"></div>
+
+    <script>
+        async function fetchNews() {
+            const apiKey = '25926c1cf7cc48009406982c2609cce3'; // Replace with your News API key
+            const keyword = document.getElementById('keyword').value;
+            const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(keyword)}&pageSize=5&apiKey=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                displayNews(data.articles);
+            } catch (error) {
+                console.error('Error fetching news:', error);
+                document.getElementById('news-container').innerHTML = '<p>Error loading news. Please try again later.</p>';
+            }
+        }
+
+        function displayNews(articles) {
+            const container = document.getElementById('news-container');
+            container.innerHTML = ''; // Clear previous results
+
+            articles.forEach(article => {
+                const item = document.createElement('div');
+                item.className = 'news-item';
+                item.innerHTML = `
+                    <img src="${article.urlToImage}" alt="News Image" class="news-image">
+                    <h2><a href="${article.url}" target="_blank">${article.title}</a></h2>
+                    <p>Published: ${article.publishedAt}</p>
+                `;
+                container.appendChild(item);
+            });
+        }
+    </script>
+</body>
+</html>
