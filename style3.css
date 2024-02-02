@@ -1,5 +1,5 @@
 
-/*this is the css for spring project one_generate info for each API*/
+/*this is the css for spring project one_chain_1*/
 body {
     display: flex;
     flex-direction: column;
@@ -31,62 +31,6 @@ label {
     font-size: 16px; /* Adjust the size as needed */
     color: #333333; /* Set your preferred color */
 }
-
-#result {
-    font-family: "Montserrat"; /* Change to your preferred font */
-    font-size: 18px; /* Adjust the size as needed */
-    color: #A93226; /* Set your preferred color */
-}
-
-#news-results {
-    margin-top: 20px;
-}
-.news-item {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-}
-.news-image {
-    width: 500px;
-    display: block;
-	margin-left: auto;
-	margin-right: auto;
-	height: auto;
-}
-
-#keyword {
-    font-family: "Montserrat"; 
-    font-size: 1.2em;
-    padding: 10px;
-    width: 50%;
-    display: block;
-    margin: 20px auto;
-}
-
-.button-anime{
-
-    font-size: 16pt;
-    background-color: #A93226;
-    color: whitesmoke;
-
-}
-
-.button-holiday{
-
-    font-size: 12pt;
-    background-color: #A93226;
-    color: whitesmoke;
-
-}
-
-.button-news{
-
-    font-size: 12pt;
-    background-color: #A93226;
-    color: whitesmoke;
-
-}
-
 
 
 h1{
@@ -204,17 +148,43 @@ img{
     max-width: 200px; /* or any size you prefer */
     height: auto;
     margin: 20px 0; /* Adds space above and below the image */
+
     
 
 }
-
-
 
 
 div.cover{
 	
 	border-radius: 10px;
 }
+
+/* customize each result section*/
+#generate-anime {
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+#anime-info {
+    background-color: #FFC0CB; /* Light pink */
+    padding: 20px;
+    margin: 20px 0;
+}
+#holiday-info {
+    background-color: #B0E0E6; /* Powder blue */
+    padding: 20px;
+    margin: 20px 0;
+}
+#news-info {
+    background-color: #FFFF99; /* Light yellow */
+    padding: 20px;
+    margin: 20px 0;
+}
+#news-info div {
+    margin-bottom: 20px;
+}
+
 
 
 

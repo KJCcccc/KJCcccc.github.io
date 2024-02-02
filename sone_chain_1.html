@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style3.css">
+    <title>Anime and News Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="generate-anime">Generate Random Anime</button>
+    <div id="anime-info"></div>
+    <div id="holiday-info"></div>
+    <div id="news-info"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#generate-anime').click(function() {
+                fetchRandomAnime();
+            });
+        });
+
+        // Step 1: Fetch a random anime
+        function fetchRandomAnime() {
+            $('#anime-info').html('Loading anime...');
+            $('#holiday-info').html('');
+            $('#news-info').html('');
+
+            const url = 'https://api.jikan.moe/v4/random/anime'; // Adjusted URL for Jikan's random anime endpoint
+            $.getJSON(url, function(data) {
+                const anime = data.data;
+                const startDate = anime.aired.from.split('T')[0]; // Assuming the format is YYYY-MM-DDTHH:MM:SS
+                displayAnimeInfo(anime);
+                fetchHoliday(startDate);
+            }).fail(function() {
+                $('#anime-info').html('Failed to load anime. Please try again.');
+            });
+        }
+
+        // Step 2: Fetch holiday based on anime's start date
+        function fetchHoliday(startDate) {
+            const [year, month, day] = startDate.split('-');
+            const holidayApiUrl = `https://holidays.abstractapi.com/v1/?api_key=4c1da4dd3be54231848895ae2ba22adc&country=US&year=${year}&month=${month}&day=${day}`;
+            $.getJSON(holidayApiUrl, function(holidays) {
+                if (holidays.length > 0) {
+                    const holiday = holidays[0].name;
+                    displayHolidayInfo(holiday);
+                    fetchNews(holiday);
+                } else {
+                    $('#holiday-info').html('No holidays found for this date.');
+                }
+            }).fail(function() {
+                $('#holiday-info').html('Failed to load holiday information.');
+            });
+        }
+
+        // Step 3: Fetch news based on holiday name
+        function fetchNews(holidayName) {
+            const newsApiKey = '25926c1cf7cc48009406982c2609cce3';
+            const newsApiUrl = `https://newsapi.org/v2/everything?q=${encodeURIComponent(holidayName)}&apiKey=${newsApiKey}`;
+            $.getJSON(newsApiUrl, function(data) {
+                const articles = data.articles.slice(0, 5); // Get top 5 articles
+                displayNewsInfo(articles);
+            }).fail(function() {
+                $('#news-info').html('Failed to load news articles.');
+            });
+        }
+
+        // Display functions
+        function displayAnimeInfo(anime) {
+            $('#anime-info').html(`<h2>${anime.title}</h2><img src="${anime.images.jpg.image_url}" alt="${anime.title}"><p>Start Date: ${anime.aired.from}</p>`);
+        }
+
+        function displayHolidayInfo(holiday) {
+            $('#holiday-info').html(`<h2>Holiday: ${holiday}</h2>`);
+        }
+
+        function displayNewsInfo(articles) {
+            let html = '<h2>Top 5 News</h2>';
+            articles.forEach(article => {
+                html += `<div><h3>${article.title}</h3><p>Published: ${article.publishedAt}</p><img src="${article.urlToImage}" alt="${article.title}"><p><a href="${article.url}" target="_blank">Read more</a></p></div>`;
+            });
+            $('#news-info').html(html);
+        }
+    </script>
+</body>
+</html>

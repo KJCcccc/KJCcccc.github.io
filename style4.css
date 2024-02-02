@@ -1,0 +1,59 @@
+
+/*this is the css for spring project one_chain_2*/
+
+body {
+    font-family: "Montserrat";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    margin: 20px 0;
+    font-family: "Montserrat";
+    word-spacing: 5pt;
+    text-align: center;
+    background-color: #161617;
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-section {
+
+    text-align: center;
+    background-color: #161617; /* Light blue */
+    padding: 20px;
+
+}
+
+#generate-anime {
+
+    padding: 10px 20px;
+    font-size: 20px; /* Enlarged font size */
+    cursor: pointer;
+}
+
+.info-section {
+    padding: 20px;
+    margin: 20px 0;
+}
+
+
+#anime-info { background-color: #495867; } 
+#holiday-info { background-color: #577399; } 
+#news-info { background-color: #bdd5ea; } 
+
+#news-info div, #nasa-info div { margin-bottom: 20px; }
+
+#nasa-info { background-color: #f7f7ff; } 
+#nasa-info img:hover + p { display: block; } /* Show text on hover */
+#nasa-info p { display: none; } /* Hide text initially */
+
+img { max-width: 100%; height: auto; cursor: pointer; }
+
+
+
+
