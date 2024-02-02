@@ -13,16 +13,46 @@ body {
 button {
     margin: 20px 0;
     font-family: "Montserrat";
-    font-size: 16pt;
+    /*font-size: 16pt;*/
     word-spacing: 5pt;
     text-align: center;
-    background-color: #002FA7;
-    color: whitesmoke;
+    /*background-color: #002FA7;
+    color: whitesmoke;*/
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+/* Customizing labels */
+label {
+    font-family: "Montserrat";
+    font-size: 16px; /* Adjust the size as needed */
+    color: #333333; /* Set your preferred color */
+}
+
+#result {
+    font-family: "Montserrat"; /* Change to your preferred font */
+    font-size: 18px; /* Adjust the size as needed */
+    color: #A93226; /* Set your preferred color */
+}
+
+
+.button-anime{
+
+    font-size: 16pt;
+    background-color: #002FA7;
+    color: whitesmoke;
+
+}
+
+.button-holiday{
+
+    font-size: 12pt;
+    background-color: #A93226;
+    color: whitesmoke;
+
 }
 
 h1{
