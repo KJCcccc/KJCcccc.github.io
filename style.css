@@ -108,7 +108,24 @@ footer a:hover{
 
 img{
 	text-align: center;
+    
 
+}
+
+.centered-image {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: auto;
+}
+.width-25 {
+	max-width: 25%;
+}
+.width-50 {
+	max-width: 50%;
+}
+.width-100 {
+	max-width: 100%;
 }
 
 
