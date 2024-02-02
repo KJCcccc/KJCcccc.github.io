@@ -66,12 +66,20 @@ label {
 .button-anime{
 
     font-size: 16pt;
-    background-color: #002FA7;
+    background-color: #A93226;
     color: whitesmoke;
 
 }
 
 .button-holiday{
+
+    font-size: 12pt;
+    background-color: #A93226;
+    color: whitesmoke;
+
+}
+
+.button-news{
 
     font-size: 12pt;
     background-color: #A93226;
