@@ -92,10 +92,51 @@
             $('#news-info').html(`<h2>Top News</h2><div><h3>${article.title}</h3><p>Published: ${firstArticleDate}</p><a href="${article.url}" target="_blank"><img src="${article.urlToImage}" alt="${article.title}"></a><p>${article.description}</p></div>`);
         }
 
-        function displayNasaInfo(data, date) {
-            // Modified to show text on hover
-            $('#nasa-info').html(`<h2>NASA Astronomy Picture of the Day</h2><img src="${data.url}" alt="NASA APOD"><p>${date}: ${data.explanation}</p>`);
+        /*previous working version👇
+
+
+        function displayNasaInfo(data) {
+            let content = `<h2>NASA Astronomy Picture of the Day</h2>`;
+            if (data.media_type === 'image') {
+                content += `
+                    <div class="nasa-container" onclick="toggleNasaText(this)">
+                        <img src="${data.url}" alt="NASA APOD" class="nasa-image">
+                        <p class="nasa-caption">${data.explanation}</p>
+                    </div>`;
+            } else if (data.media_type === 'video') {
+                content += `<iframe src="${data.url}" frameborder="0" class="nasa-video"></iframe><p>${data.explanation}</p>`;
+            }
+            $('#nasa-info').html(content);
         }
+
+        // Function to toggle the visibility of the NASA text
+        function toggleNasaText(container) {
+            $(container).find('.nasa-caption').toggleClass('visible');
+            $(container).find('.nasa-image').toggleClass('faded');
+        }*/
+
+        function displayNasaInfo(data) {
+            let content = `<h2>NASA Astronomy Picture of the Day</h2>`;
+            if (data.media_type === 'image') {
+                content += `
+                    <div class="nasa-container">
+                        <img src="${data.url}" alt="NASA APOD" class="nasa-image" onclick="toggleNasaText(this)">
+                        <p class="nasa-caption">${data.explanation}</p>
+                    </div>`;
+            } else if (data.media_type === 'video') {
+                content += `<iframe src="${data.url}" frameborder="0" class="nasa-video"></iframe><p>${data.explanation}</p>`;
+            }
+            $('#nasa-info').html(content);
+        }
+
+        // Function to toggle the visibility of the NASA text overlay
+        function toggleNasaText(element) {
+            $(element).siblings('.nasa-caption').toggleClass('visible');
+        }
+
+
+
+
 
         function clearInfoSections() {
             $('#anime-info').html('Loading anime...');
