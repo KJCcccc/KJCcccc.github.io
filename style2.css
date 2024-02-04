@@ -1,12 +1,30 @@
 
 /*this is the css for spring project one_generate info for each API*/
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+body, html {
     margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.form-input {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.apod-result img, .apod-result iframe {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Center the image */
+    margin: 0 auto; /* Center the image */
+}
+.apod-result {
+    text-align: center;
 }
 
 
@@ -82,6 +100,14 @@ label {
 .button-news{
 
     font-size: 12pt;
+    background-color: #A93226;
+    color: whitesmoke;
+
+}
+
+.button-nasa{
+
+    font-size: 16pt;
     background-color: #A93226;
     color: whitesmoke;
 
@@ -215,8 +241,6 @@ div.cover{
 	
 	border-radius: 10px;
 }
-
-
 
 
 

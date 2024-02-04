@@ -3,40 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astronomy Picture of the Day</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .form-input {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .apod-result img, .apod-result iframe {
-            max-width: 100%;
-            height: auto;
-            display: block; /* Center the image */
-            margin: 0 auto; /* Center the image */
-        }
-        .apod-result {
-            text-align: center;
-        }
-        
-    </style>
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    <title>Astronomy Picture of the Day You Enter</title>
+
     <script>
         async function fetchAPOD() {
             const date = document.getElementById('date-input').value;
-            const apiKey = 'DEMO_KEY'; // Use your own API key here
+            const apiKey = '7jMgzZwWqn91FeAXUzfMNQroyVEm71zKJ8fD6jIf'; // Use your own API key here
             const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
 
             try {
@@ -64,7 +37,7 @@
 <body>
     <div class="container">
         <div class="form-input">
-            <h1>Astronomy Picture of the Day</h1>
+            <h1>Astronomy Picture of the Day You Enter</h1>
             <input type="date" id="date-input" max="2023-12-31">
             <button onclick="fetchAPOD()">Get Image</button>
         </div>
