@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style2.css">
+
     <title>Random Anime Information</title>
     <script>
+        // Defines an asynchronous function to fetch and display random anime information
         async function getRandomAnimeInformation() {
             try {
-                // Fetch the top anime list
+                // Fetches data from the Jikan API for top anime
                 const response = await fetch('https://api.jikan.moe/v4/top/anime');
+                // Checks if the fetch request was successful
                 if (!response.ok) throw new Error('Network response was not ok.');
 
+                // Parses the JSON response into a JavaScript object
                 const data = await response.json();
-                // Pick a random anime from the top list
+                // Selects a random anime from the fetched list
                 const randomAnime = data.data[Math.floor(Math.random() * data.data.length)];
-                // Display the title and image of the random anime
+
+                // Extracts the title and image URL of the random anime
                 const animeTitle = randomAnime.title;
                 const animeImage = randomAnime.images.jpg.image_url;
+
+                // Initializes a variable to hold airing time or start date information
                 let airingTimeOrStartDate = "Time data not available";
 
-                // Check if airing details are available, otherwise use start date
+                // Determines whether to display airing time or start date based on available data
                 if (randomAnime.broadcast && randomAnime.broadcast.start_time) {
                     airingTimeOrStartDate = `Airing Time: ${randomAnime.broadcast.start_time}`;
                 } else if (randomAnime.aired && randomAnime.aired.from) {
-                    airingTimeOrStartDate = `Start Date: ${randomAnime.aired.from.split('T')[0]}`; // Extracting date part only
+                    airingTimeOrStartDate = `Start Date: ${randomAnime.aired.from.split('T')[0]}`; // Extracts just the date part
                 }
 
+                // Updates the webpage elements with the fetched anime information
                 document.getElementById('animeTitle').innerText = `Anime: ${animeTitle}`;
                 document.getElementById('animeImage').src = animeImage;
                 document.getElementById('animeImage').alt = `Image of ${animeTitle}`;
                 document.getElementById('timeData').innerText = airingTimeOrStartDate;
             } catch (error) {
+                // Handles any errors that occur during the fetch operation
                 console.error('Failed to fetch data from Jikan API:', error);
+                // Updates the webpage to show an error message
                 document.getElementById('animeTitle').innerText = 'Failed to fetch data from Jikan API';
                 document.getElementById('timeData').innerText = '';
                 document.getElementById('animeImage').src = '';
@@ -42,12 +53,18 @@
     </script>
 </head>
 <body>
+    <!-- Displays the title of the webpage -->
     <h1>Random Anime Information</h1>
     
-     <div class="content-center">
+    <!-- Container for the button and anime information elements -->
+    <div class="content-center">
+        <!-- Button to trigger the fetch operation -->
         <button onclick="getRandomAnimeInformation()" class="button-anime">Get Random Anime Information</button>
+        <!-- Paragraph element to display the title of the random anime -->
         <p id="animeTitle"></p>
+        <!-- Image element to display the image of the random anime -->
         <img id="animeImage" alt="Anime image" style="max-width: 200px; height: auto;">
+        <!-- Paragraph element to display the airing time or start date of the anime -->
         <p id="timeData"></p>
     </div>
 </body>

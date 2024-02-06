@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="style2.css">
-<title>Holiday Finder</title>
-<script>
-// Function to fetch holiday information
-async function fetchHoliday() {
-    // Get the user input values
-    const month = document.getElementById('month').value;
-    const day = document.getElementById('day').value;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    <title>Holiday Finder</title>
+    <script>
+        // Defines an asynchronous function to fetch holiday information based on user input
+        async function fetchHoliday() {
+            // Retrieves the month and day values input by the user
+            const month = document.getElementById('month').value;
+            const day = document.getElementById('day').value;
 
-    // Construct the API URL
-    const apiKey = '4c1da4dd3be54231848895ae2ba22adc';
-    const url = `https://holidays.abstractapi.com/v1/?api_key=${apiKey}&country=US&year=2023&month=${month}&day=${day}`;
+            // API key for the holiday API and constructs the request URL with user inputs
+            const apiKey = '4c1da4dd3be54231848895ae2ba22adc';
+            const url = `https://holidays.abstractapi.com/v1/?api_key=${apiKey}&country=US&year=2023&month=${month}&day=${day}`;
 
-    try {
-        // Fetch the holiday data
-        const response = await fetch(url);
-        const holidays = await response.json();
+            try {
+                // Performs the API request to fetch holiday data
+                const response = await fetch(url);
+                const holidays = await response.json();
 
-        // Display the result
-        if (holidays.length > 0) {
-            document.getElementById('result').textContent = `Holiday: ${holidays[0].name}`;
-        } else {
-            document.getElementById('result').textContent = 'No holidays found for this day.';
+                // Checks if any holidays were found and updates the webpage accordingly
+                if (holidays.length > 0) {
+                    document.getElementById('result').textContent = `Holiday: ${holidays[0].name}`;
+                } else {
+                    document.getElementById('result').textContent = 'No holidays found for this day.';
+                }
+            } catch (error) {
+                // Logs and displays an error message if the fetch operation fails
+                console.error('Fetching holiday failed:', error);
+                document.getElementById('result').textContent = 'Error fetching holiday information.';
+            }
         }
-    } catch (error) {
-        console.error('Fetching holiday failed:', error);
-        document.getElementById('result').textContent = 'Error fetching holiday information.';
-    }
-}
 
-// Prevent form submission
-window.onload = function() {
-    document.getElementById('holidayForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        fetchHoliday();
-    });
-};
-</script>
+        // Adds an event listener to prevent the default form submission and call the fetchHoliday function instead
+        window.onload = function() {
+            document.getElementById('holidayForm').addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevents the form from submitting in the traditional way
+                fetchHoliday(); // Calls the function to fetch and display holiday information
+            });
+        };
+    </script>
 </head>
 <body>
-<h1>Find a Holiday</h1>
+    <h1>Find a Holiday</h1>
 
-<div class="content-center">
-    <form id="holidayForm">
-        <label for="month">Month:</label>
-        <input type="number" id="month" name="month" min="1" max="12" required>
-        <label for="day">Day:</label>
-        <input type="number" id="day" name="day" min="1" max="31" required>
-        <button type="submit" class="button-holiday">Get Holiday</button>
-    </form>
-    <div id="result"></div>
-</div>
-
-<div id="result"></div>
+    <div class="content-center">
+        <!-- Form for user input. On submission, it calls fetchHoliday() without reloading the page -->
+        <form id="holidayForm">
+            <label for="month">Month:</label>
+            <input type="number" id="month" name="month" min="1" max="12" required>
+            <label for="day">Day:</label>
+            <input type="number" id="day" name="day" min="1" max="31" required>
+            <button type="submit" class="button-holiday">Get Holiday</button>
+        </form>
+        <!-- Placeholder for displaying the result of the holiday search -->
+        <div id="result"></div>
+    </div>
 </body>
 </html>
