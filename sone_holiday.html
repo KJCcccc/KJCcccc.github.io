@@ -44,13 +44,18 @@ window.onload = function() {
 </head>
 <body>
 <h1>Find a Holiday</h1>
-<form id="holidayForm">
-    <label for="month">Month:</label>
-    <input type="number" id="month" name="month" min="1" max="12" required>
-    <label for="day">Day:</label>
-    <input type="number" id="day" name="day" min="1" max="31" required>
-    <button type="submit" class="button-holiday">Get Holiday</button>
-</form>
+
+<div class="content-center">
+    <form id="holidayForm">
+        <label for="month">Month:</label>
+        <input type="number" id="month" name="month" min="1" max="12" required>
+        <label for="day">Day:</label>
+        <input type="number" id="day" name="day" min="1" max="31" required>
+        <button type="submit" class="button-holiday">Get Holiday</button>
+    </form>
+    <div id="result"></div>
+</div>
+
 <div id="result"></div>
 </body>
 </html>

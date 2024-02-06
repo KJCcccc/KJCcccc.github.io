@@ -1,17 +1,27 @@
 
 /*this is the css for spring project one_generate info for each API*/
 body, html {
-    margin: 0;
-    padding: 0;
+    /*margin: 0;
+    padding: 0;*/
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: white;
 }
+
+.button-container {
+    text-align: center;
+}
+
 .container {
     width: 100%;
     max-width: 800px;
     margin: auto;
     padding: 20px;
     box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
 }
 .form-input {
     text-align: center;
@@ -34,8 +44,8 @@ button {
     /*font-size: 16pt;*/
     word-spacing: 5pt;
     text-align: center;
-    /*background-color: #002FA7;
-    color: whitesmoke;*/
+    background-color: #A93226;
+    color: whitesmoke;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -84,34 +94,40 @@ label {
 .button-anime{
 
     font-size: 16pt;
-    background-color: #A93226;
-    color: whitesmoke;
 
 }
 
-.button-holiday{
-
-    font-size: 12pt;
-    background-color: #A93226;
-    color: whitesmoke;
-
-}
 
 .button-news{
 
     font-size: 12pt;
-    background-color: #A93226;
-    color: whitesmoke;
 
 }
 
 .button-nasa{
 
     font-size: 10pt;
-    background-color: #A93226;
-    color: whitesmoke;
 
 }
+
+
+/* Ensure the button is centered by applying margin auto and displaying it as a block if not already */
+.button-holiday {
+    font-size: 12pt;
+    display: inline-block; /* Use block if you want the button to be on its own line */
+    margin: 20px auto; /* Adds margin on the top and bottom, auto centers it horizontally */
+}
+
+.content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Existing styles */
+/* Add or adjust other styles as needed */
+
 
 
 
@@ -227,7 +243,7 @@ footer a:hover{
 img{
 	text-align: center;
     
-    max-width: 200px; /* or any size you prefer */
+    max-width: 100%; /* or any size you prefer */
     height: auto;
     margin: 20px 0; /* Adds space above and below the image */
     
