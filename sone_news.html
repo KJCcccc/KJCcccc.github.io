@@ -8,38 +8,53 @@
 </head>
 <body>
     <h1>Search for News</h1>
+    <!-- Input field for users to enter their search keywords -->
     <input type="text" id="keyword" placeholder="Enter keywords">
+    <!-- Button that triggers the fetchNews function when clicked -->
     <button onclick="fetchNews()" class="button-news" id="center">Search News</button>
+    <!-- Container where the fetched news articles will be displayed -->
     <div id="news-container"></div>
 
     <script>
+        // Asynchronous function to fetch news articles based on the user's search keyword
         async function fetchNews() {
-            const apiKey = '25926c1cf7cc48009406982c2609cce3'; // Replace with your News API key
+            // Your News API key should be placed here
+            const apiKey = '25926c1cf7cc48009406982c2609cce3';
+            // Retrieves the keyword entered by the user
             const keyword = document.getElementById('keyword').value;
+            // Constructs the request URL with the user's keyword and API key
             const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(keyword)}&pageSize=5&apiKey=${apiKey}`;
 
             try {
+                // Fetches the news data from the API
                 const response = await fetch(url);
                 const data = await response.json();
+                // Calls the displayNews function to update the webpage with the fetched news articles
                 displayNews(data.articles);
             } catch (error) {
+                // Logs an error message if the fetch operation fails and displays an error message to the user
                 console.error('Error fetching news:', error);
                 document.getElementById('news-container').innerHTML = '<p>Error loading news. Please try again later.</p>';
             }
         }
 
+        // Function to display the fetched news articles on the webpage
         function displayNews(articles) {
             const container = document.getElementById('news-container');
-            container.innerHTML = ''; // Clear previous results
+            container.innerHTML = ''; // Clears any previous results
 
+            // Iterates over each article in the fetched data
             articles.forEach(article => {
+                // Creates a new div element for each article
                 const item = document.createElement('div');
                 item.className = 'news-item';
+                // Sets the inner HTML of the div to include the article's image, title (as a link), and publication date
                 item.innerHTML = `
                     <img src="${article.urlToImage}" alt="News Image" class="news-image">
                     <h2><a href="${article.url}" target="_blank">${article.title}</a></h2>
                     <p>Published: ${article.publishedAt}</p>
                 `;
+                // Appends the newly created div to the news container
                 container.appendChild(item);
             });
         }

@@ -7,15 +7,21 @@
     <title>Astronomy Picture of the Day You Enter</title>
 
     <script>
+        // Defines an asynchronous function to fetch the Astronomy Picture of the Day (APOD) from NASA's API
         async function fetchAPOD() {
+            // Retrieves the date input by the user
             const date = document.getElementById('date-input').value;
-            const apiKey = '7jMgzZwWqn91FeAXUzfMNQroyVEm71zKJ8fD6jIf'; // Use your own API key here
+            // Your NASA API key should be placed here
+            const apiKey = '7jMgzZwWqn91FeAXUzfMNQroyVEm71zKJ8fD6jIf';
+            // Constructs the request URL with the API key and user-provided date
             const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
 
             try {
+                // Fetches the APOD data from NASA's API
                 const response = await fetch(url);
                 const data = await response.json();
 
+                // Checks the media type of the APOD and updates the webpage to display the image or video accordingly
                 if (data.media_type === 'image') {
                     document.getElementById('apod-image').src = data.url;
                     document.getElementById('apod-image').style.display = 'block';
@@ -26,9 +32,11 @@
                     document.getElementById('apod-video').style.display = 'block';
                 }
 
+                // Updates the webpage with the title and explanation of the APOD
                 document.getElementById('apod-title').innerText = data.title;
                 document.getElementById('apod-explanation').innerText = data.explanation;
             } catch (error) {
+                // Logs an error message if the fetch operation fails
                 console.error('Failed to fetch APOD:', error);
             }
         }
@@ -38,12 +46,17 @@
     <div class="container">
         <div class="form-input">
             <h1>Astronomy Picture of the Day You Enter</h1>
+            <!-- Input field for the user to select a date -->
             <input type="date" id="date-input" max="2023-12-31">
+            <!-- Button that triggers the fetchAPOD function when clicked -->
             <button onclick="fetchAPOD()" class="button-nasa">Get Image</button>
         </div>
         <div class="apod-result">
+            <!-- Image element for displaying the APOD image; initially hidden -->
             <img id="apod-image" style="display:none;" alt="Astronomy Picture of the Day">
+            <!-- Iframe element for displaying the APOD video; initially hidden -->
             <iframe id="apod-video" style="display:none;" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+            <!-- Elements for displaying the title and explanation of the APOD -->
             <h2 id="apod-title"></h2>
             <p id="apod-explanation"></p>
         </div>

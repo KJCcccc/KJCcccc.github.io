@@ -5,139 +5,119 @@
     <link rel="stylesheet" type="text/css" href="style4.css">
     <title>Anime, News, and NASA Dashboard</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 <body>
+    <!-- Section for the button to generate random anime -->
     <div class="button-section">
         <button id="generate-anime">Click To Generate Random Anime</button>
     </div>
+    <!-- Containers for displaying information fetched from various APIs -->
     <div id="anime-info" class="info-section"></div>
     <div id="holiday-info" class="info-section"></div>
     <div id="news-info" class="info-section"></div>
     <div id="nasa-info" class="info-section"></div>
 
     <script>
+        // jQuery document ready function to ensure the DOM is fully loaded before executing any script
         $(document).ready(function() {
+            // Event listener for the button click to generate random anime
             $('#generate-anime').click(function() {
                 fetchRandomAnime();
             });
         });
 
+        // Function to fetch random anime information
         function fetchRandomAnime() {
-            clearInfoSections();
-            const url = 'https://api.jikan.moe/v4/random/anime';
+            clearInfoSections(); // Clears previous information displayed
+            const url = 'https://api.jikan.moe/v4/random/anime'; // API endpoint for fetching random anime
             $.getJSON(url, function(data) {
-                const anime = data.data;
-                const startDate = anime.aired.from.split('T')[0]; // Remove time part
-                displayAnimeInfo(anime, startDate);
-                fetchHoliday(startDate);
+                const anime = data.data; // Extract the anime data
+                const startDate = anime.aired.from.split('T')[0]; // Extract the start date
+                displayAnimeInfo(anime, startDate); // Display the anime information
+                fetchHoliday(startDate); // Fetch related holiday information based on the anime's start date
             }).fail(function() {
-                $('#anime-info').html('Failed to load anime. Please try again.');
+                $('#anime-info').html('Failed to load anime. Please try again.'); // Error handling
             });
         }
 
+        // Function to fetch holiday information based on the date
         function fetchHoliday(startDate) {
-            const [year, month, day] = startDate.split('-');
+            const [year, month, day] = startDate.split('-'); // Split the date to year, month, and day
             const holidayApiUrl = `https://holidays.abstractapi.com/v1/?api_key=4c1da4dd3be54231848895ae2ba22adc&country=US&year=${year}&month=${month}&day=${day}`;
             $.getJSON(holidayApiUrl, function(holidays) {
                 if (holidays.length > 0) {
-                    const holiday = holidays[0].name;
-                    displayHolidayInfo(holiday);
-                    fetchNews(holiday);
+                    const holiday = holidays[0].name; // Extract the first holiday found
+                    displayHolidayInfo(holiday); // Display the holiday information
+                    fetchNews(holiday); // Fetch related news based on the holiday name
                 } else {
-                    $('#holiday-info').html('No holidays found for this date.');
+                    $('#holiday-info').html('No holidays found for this date.'); // No holidays found
                 }
             }).fail(function() {
-                $('#holiday-info').html('Failed to load holiday information.');
+                $('#holiday-info').html('Failed to load holiday information.'); // Error handling
             });
         }
 
+        // Function to fetch news articles related to the holiday name
         function fetchNews(holidayName) {
             const newsApiKey = '25926c1cf7cc48009406982c2609cce3';
             const newsApiUrl = `https://newsapi.org/v2/everything?q=${encodeURIComponent(holidayName)}&apiKey=${newsApiKey}`;
             $.getJSON(newsApiUrl, function(data) {
                 if (data.articles.length > 0) {
-                    const firstArticle = data.articles[0];
-                    const firstArticleDate = firstArticle.publishedAt.split('T')[0]; // Remove time part
-                    displayNewsInfo(firstArticle, firstArticleDate);
-                    fetchNasaImage(firstArticleDate);
+                    const firstArticle = data.articles[0]; // Extract the first article
+                    const firstArticleDate = firstArticle.publishedAt.split('T')[0]; // Extract the publication date
+                    displayNewsInfo(firstArticle, firstArticleDate); // Display the news information
+                    fetchNasaImage(firstArticleDate); // Fetch the NASA APOD based on the article's publication date
                 } else {
-                    $('#news-info').html('No news articles found.');
+                    $('#news-info').html('No news articles found.'); // No articles found
                 }
             }).fail(function() {
-                $('#news-info').html('Failed to load news articles.');
+                $('#news-info').html('Failed to load news articles.'); // Error handling
             });
         }
 
+        // Function to fetch the NASA Astronomy Picture of the Day based on the date
         function fetchNasaImage(date) {
             const nasaApiKey = '7jMgzZwWqn91FeAXUzfMNQroyVEm71zKJ8fD6jIf';
             const nasaApiUrl = `https://api.nasa.gov/planetary/apod?api_key=${nasaApiKey}&date=${date}`;
             $.getJSON(nasaApiUrl, function(data) {
-                displayNasaInfo(data, date);
+                displayNasaInfo(data, date); // Display the NASA APOD information
             }).fail(function() {
-                $('#nasa-info').html('Failed to load NASA Astronomy Picture of the Day.');
+                $('#nasa-info').html('Failed to load NASA Astronomy Picture of the Day.'); // Error handling
             });
         }
 
+        // Function to display anime information
         function displayAnimeInfo(anime, startDate) {
             $('#anime-info').html(`<h2>${anime.title}</h2><img src="${anime.images.jpg.image_url}" alt="${anime.title}"><p>Start Date: ${startDate}</p>`);
         }
 
+        // Function to display holiday information
         function displayHolidayInfo(holiday) {
             $('#holiday-info').html(`<h2>Holiday: ${holiday}</h2>`);
         }
 
+        // Function to display news information
         function displayNewsInfo(article, firstArticleDate) {
-            // Modified to make the image clickable
             $('#news-info').html(`<h2>Top News</h2><div><h3>${article.title}</h3><p>Published: ${firstArticleDate}</p><a href="${article.url}" target="_blank"><img src="${article.urlToImage}" alt="${article.title}"></a><p>${article.description}</p></div>`);
         }
 
-        /*previous working version👇
-
-
+        // Function to display NASA APOD information with an interactive image or video
         function displayNasaInfo(data) {
             let content = `<h2>NASA Astronomy Picture of the Day</h2>`;
             if (data.media_type === 'image') {
-                content += `
-                    <div class="nasa-container" onclick="toggleNasaText(this)">
-                        <img src="${data.url}" alt="NASA APOD" class="nasa-image">
-                        <p class="nasa-caption">${data.explanation}</p>
-                    </div>`;
+                content += `<div class="nasa-container"><img src="${data.url}" alt="NASA APOD" class="nasa-image" onclick="toggleNasaText(this)"><p class="nasa-caption">${data.explanation}</p></div>`;
             } else if (data.media_type === 'video') {
                 content += `<iframe src="${data.url}" frameborder="0" class="nasa-video"></iframe><p>${data.explanation}</p>`;
             }
             $('#nasa-info').html(content);
         }
 
-        // Function to toggle the visibility of the NASA text
-        function toggleNasaText(container) {
-            $(container).find('.nasa-caption').toggleClass('visible');
-            $(container).find('.nasa-image').toggleClass('faded');
-        }*/
-
-        function displayNasaInfo(data) {
-            let content = `<h2>NASA Astronomy Picture of the Day</h2>`;
-            if (data.media_type === 'image') {
-                content += `
-                    <div class="nasa-container">
-                        <img src="${data.url}" alt="NASA APOD" class="nasa-image" onclick="toggleNasaText(this)">
-                        <p class="nasa-caption">${data.explanation}</p>
-                    </div>`;
-            } else if (data.media_type === 'video') {
-                content += `<iframe src="${data.url}" frameborder="0" class="nasa-video"></iframe><p>${data.explanation}</p>`;
-            }
-            $('#nasa-info').html(content);
-        }
-
-        // Function to toggle the visibility of the NASA text overlay
+        // Function to toggle the visibility of the NASA text overlay when the image is clicked
         function toggleNasaText(element) {
             $(element).siblings('.nasa-caption').toggleClass('visible');
         }
 
-
-
-
-
+        // Function to clear all information sections before fetching new data
         function clearInfoSections() {
             $('#anime-info').html('Loading anime...');
             $('#holiday-info').html('');
