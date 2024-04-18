@@ -120,9 +120,19 @@ img{
 	margin-right: auto;
 	height: auto;
 }
+
+.width-24 {
+	max-width: 24%;
+}
+
 .width-25 {
 	max-width: 25%;
 }
+
+.width-49 {
+	max-width: 49%;
+}
+
 .width-50 {
 	max-width: 50%;
 }
